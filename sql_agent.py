@@ -7,9 +7,22 @@ from langchain.prompts import ChatPromptTemplate
 from langchain_core.messages import HumanMessage, AIMessage
 from dotenv import load_dotenv
 import os
-
+import tempfile
+import json
 # Load environment variables
-load_dotenv()
+# load_dotenv()
+
+os.environ["OPEN_API_KEY"] = st.secrets["OPEN_API_KEY"]
+
+service_account_info = st.secrets["gcp_service_account"]
+
+# Write to a temporary file
+with tempfile.NamedTemporaryFile(delete=False, mode="w") as tmp:
+    json.dump(service_account_info, tmp)
+    tmp_path = tmp.name
+
+# Set the environment variable for Google libraries
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = tmp_path
 
 # Set Streamlit page config
 st.set_page_config(page_title="LangChain SQL Agent", layout="wide")
