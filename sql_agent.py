@@ -12,7 +12,7 @@ import json
 # Load environment variables
 # load_dotenv()
 
-os.environ["OPEN_API_KEY"] = st.secrets["OPEN_API_KEY"]
+os.environ["OPENAI_API_KEY"] = st.secrets["OPEN_API_KEY"]
 
 service_account_info = st.secrets["gcp_service_account"]
 
