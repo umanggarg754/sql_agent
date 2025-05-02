@@ -16,9 +16,11 @@ os.environ["OPEN_API_KEY"] = st.secrets["OPEN_API_KEY"]
 
 service_account_info = st.secrets["gcp_service_account"]
 
+service_account_dict = dict(service_account_info)
+
 # Write to a temporary file
 with tempfile.NamedTemporaryFile(delete=False, mode="w") as tmp:
-    json.dump(service_account_info, tmp)
+    json.dump(service_account_dict, tmp)
     tmp_path = tmp.name
 
 # Set the environment variable for Google libraries
